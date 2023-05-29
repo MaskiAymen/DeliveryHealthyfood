@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Creation</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+<main>
+    <div class="p-0" style="    margin: 14%;">
+    <form th:action="@{saveProduct}" method="post">
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="nameProduct" >Product Name : </label>
+            <input   class="form-control" type="text" id="nameProduct" name="nameProduct">
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="priceProduct">Price : </label>
+            <input class="form-control" type="text" id="priceProduct" name="priceProduct">
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="dateCreate">Creation Date : </label>
+            <input class="form-control" type="date" id="dateCreate" name="dateCreate" value="${now}">
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="fat">Fat : </label>
+            <input class="form-control" type="text" id="fat" name="fat">
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="calories">calories : </label>
+            <input class="form-control"  type="text" id="calories" name="calories">
+
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="protein">Protein : </label>
+            <input class="form-control" type="text" id="protein" name="protein">
+        </div>
+        <div class="mb-3 mt-3">
+            <label class="form-label" for="description">Description : </label>
+            <input class="form-control" type="text" id="description" name="description">
+        </div>
+        <div>
+
+            <button type="submit" class="btn btn-primary" value="Save">Save</button>
+        </div>
+    </form>
+    </div>
+</main>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.0/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Products List</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+<main>
+    <table class="table" >
+        <thead>
+        <tr>
+            <th>Product Id</th><th>Product Name</th><th>Product Price</th><th>Create Date</th>
+            <th>fat</th><th>calories</th><th>protein</th><th>description</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product:${productsJsp}">
+                <td th:text="${product.idProduct}"></td>
+                <td th:text="${product.nameProduct}"></td>
+                <td th:text="${product.priceProduct}"></td>
+                <td th:text="${product.dateCreate}"></td>
+                <td th:text="${product.fat}"></td>
+                <td th:text="${product.calories}"></td>
+                <td th:text="${product.protein}"></td>
+                <td th:text="${product.description}"></td>
+
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                    <a onClick="return confirm('Are you sure to delete this item?')" class="btn btn-danger"
+                       th:href="@{deleteProduct(id=${product.idProduct},
+                       page=${currentPage},
+                       size=${size}
+                       )}"
+                >Delete</a>
+                </td>
+                <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                ><a th:href="@{showProduct(id=${product.idProduct})}"  class="btn btn-danger"
+                >Edit</a></td>
+            </tr>
+
+        </tbody>
+
+    </table>
+    <ul class="nav nav-pills">
+        <li th:each="page,status:${pages}">
+            <a
+                    th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
+                    th:href="@{productsList(page=${status.index}, size=${size})}"
+                    th:text="${status.index}">
+            </a>
+        </li>
+    </ul>
+</main>
+</div>
+</body>
+</html>

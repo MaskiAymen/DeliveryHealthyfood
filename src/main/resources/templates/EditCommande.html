@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+
+<body>
+<div layout:fragment="content">
+
+
+    <main >
+        <form th:action="@{updateCommande}" method="post">
+            <div>
+                <!--on peut ajouter un parametre au id : hidden -->
+                <label  hidden for="idCommande">Commande Id : </label>
+                <input hidden type="text" id="idCommande" name="idCommande"
+                       th:value="${commandeJsp.idCommande}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label  class="form-label" for="nameFood">Commande Name : </label>
+                <input  class="form-control"type="text" id="nameFood" name="nameFood"
+                        th:value="${commandeJsp.nameFood}">
+            </div>
+
+            <div class="mb-3 mt-3">
+                <label  class="form-label"for="dateCreate">Creation Date : </label>
+
+                <input class="form-control" type="date" id="dateCreate" name="dateCreate"
+                       th:value="${commandeJsp.dateCreate}">
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="adresse">Adresse : </label>
+                <input class="form-control" type="text" id="adresse" name="adresse"
+                       th:value="${commandeJsp.adresse}">
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-primary" value="update">Update</button>
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

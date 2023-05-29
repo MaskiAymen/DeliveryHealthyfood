@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="Template.html">
+<head>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.2.0/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <title>Commandes List</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+
+    <main>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>Commande Id</th><th>Commande Name</th><th>Date</th><th></th>adresse</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="commande:${commandesJsp}">
+                <td th:text="${commande.idCommande}"></td>
+                <td th:text="${commande.nameFood}"></td>
+                <td th:text="${commande.dateCreate}"></td>
+                <td th:text="${commande.adresse}"></td>
+
+                <td th:if="${#authorization.expression('hasAnyRole(''ADMIN'',''CASHIER'')')}">
+                    <a onClick="return confirm('Are you sure to delete this item?')" class="btn btn-danger"
+                       th:href="@{deleteCommande(id=${commande.idCommande},
+                       page=${currentPage},
+                       size=${size}
+                       )}"
+                    >Delete</a>
+                </td>
+                <td th:if="${#authorization.expression('hasAnyRole(''ADMIN'',''CASHIER'')')}"
+                ><a th:href="@{showCommande(id=${commande.idCommande})}"  class="btn btn-danger"
+                >Edit</a></td>
+            </tr>
+
+            </tbody>
+
+        </table>
+        <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}">
+                <a
+                        th:class="${status.index==currentPage?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
+                        th:href="@{commandesList(page=${status.index}, size=${size})}"
+                        th:text="${status.index}">
+                </a>
+            </li>
+        </ul>
+    </main>
+</div>
+</body>
+</html>
